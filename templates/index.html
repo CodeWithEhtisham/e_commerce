@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		<title>Compass Starter by Ariona, Rian</title>
+
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="staic/fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	</head>
+
+	<body>
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="index.html" class="branding">
+						<img src="static/images/logo.png" alt="" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">Company name</h1>
+							<small class="site-description">tagline goes here</small>
+							<form method="POST" class="search_form">
+							</form>
+						</div>
+					</a>
+
+					<!-- Default snippet for navigation -->
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
+							<li class="menu-item"><a href="trend.html">Trend</a></li>
+							<li class="menu-item"><a href="calander.html">calendar</a></li>
+
+						</ul> <!-- .menu -->
+					</div> <!-- .main-navigation -->
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+				<h1 style="padding-left: 5%;"> Weather:</h1>
+			</div> <!-- .site-header -->
+			<div class="forecast-table">
+				<div class="container">
+					<div class="forecast-container">
+						<div class="today forecast">
+							<div class="forecast-header">
+								<div class="day">{{data.weather.current.day}}</div>
+								<div class="date">{{data.weather.current.date}}</div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div class="location">{{data.weather.current.city}}</div>
+								<div class="degree">
+									<div class="num">{{data.weather.current.temp}}<sup>o</sup>C</div>
+									<div class="forecast-icon">
+										<img src="static/images/icons/icon-1.svg" alt="" width=60>
+									</div>
+								</div>
+								<span><img src="static/images/icon-umberella.png" alt="">{{data.weather.current.cloud}}%</span>
+								<span><img src="static/images/icon-wind.png" alt="">{{data.weather.current.wind}}m/s</span>
+								<span><img src="static/images/icon-compass.png" alt="">East</span>
+							</div>
+						</div>
+						{%for i in data.weather.daily%}
+						<div class="forecast">
+							<div class="forecast-header">
+								<div class="day">{{data.weather.daily[i].day}}</div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div class="forecast-icon">
+									<img src="static/images/icons/icon-3.svg" alt="" width=48>
+								</div>
+								<div class="degree">{{data.weather.daily[i].temp}}<sup>o</sup>C</div>
+								<small>wind<sup>o</sup></small>
+							</div>
+						</div>
+
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<main class="main-content">
+				<body>
+				<h1 style="padding-left: 5%;">Product:</h1>
+				<div id="wrap">
+				<div id="columns" class="columns_4">
+				{%for i in data.product%}
+					<figure>
+						<img src="{{data.product[i][1]}}">
+						<figcaption>{{data.product[i][0]}}</figcaption>
+						<span class="price">{{data.product[i][2]}}</span>
+						<br>
+						<span class="price">{{data.product[i][3]}}</span>
+						<a class="button" href="#">Add to cart</a>
+					</figure>
+
+				{% endfor %}
+	</body>
+
+</html>
