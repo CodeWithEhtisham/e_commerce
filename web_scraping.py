@@ -4,7 +4,10 @@ import urllib3
 from urllib.request import Request,urlopen
 from bs4 import BeautifulSoup
 import re
+import numpy as np
 import json
+from operator import itemgetter
+import random
 
 class scrape:
     url1="https://www.fairprice.com.sg/product-listing?hasStock=1&loadMoreType=SEEALL&sorting=POPULARITY&tag=best-sellers&title=Best%20Sellers&loc=ProductWidget-BestSellers&pageType=Home"
@@ -25,17 +28,27 @@ class scrape:
     def json_parser(self):
         with open('data.json') as f:
             data = json.load(f)
+            trend=random.sample(range(0, 300), 60)
             my_data={}
+            trend_data={}
             data=data["individualSalesProductGrid"]['data']
             for index,value in enumerate(data):
-                my_data[index]=[value['itemTitle'],
-                value["itemImg"],value["itemPackageSize"],value["itemPrice"]+"$",value['itemReviews']]
-            return my_data
+                if index in trend:
+                    trend_data[index]=[value['itemTitle'],
+                value["itemImg"],value["itemPackageSize"],value["itemPrice"]+"$",str(value['itemReviews'])]
+                else:
+                    my_data[index]=[value['itemTitle'],
+                    value["itemImg"],value["itemPackageSize"],value["itemPrice"]+"$",str(value['itemReviews'])]
+            
+            print(len(trend_data))
+            print(len(my_data))
+            
+            return my_data,trend_data
 
 
 
 
 if __name__ == "__main__":
     obj=scrape(scrape.url1)
-    print(obj.scrape_1())
-    print(obj.json_parser())
+    obj.scrape_1()
+    obj.json_parser()
