@@ -25,25 +25,21 @@ class scrape:
         except Exception as e:
             print("request ",e)
             # pass
-    def json_parser(self):
-        with open('data.json') as f:
+    def json_parser(self,name):
+        with open('data/label.json') as f:
             data = json.load(f)
-            trend=random.sample(range(0, 300), 60)
+            # trend=random.sample(range(0, 300), 60)
             my_data={}
-            trend_data={}
-            data=data["individualSalesProductGrid"]['data']
+            # trend_data={}
+            data=data[str(name)]['data']
             for index,value in enumerate(data):
-                if index in trend:
-                    trend_data[index]=[value['itemTitle'],
+                my_data[index]=[value['itemTitle'],
                 value["itemImg"],value["itemPackageSize"],value["itemPrice"]+"$",str(value['itemReviews'])]
-                else:
-                    my_data[index]=[value['itemTitle'],
-                    value["itemImg"],value["itemPackageSize"],value["itemPrice"]+"$",str(value['itemReviews'])]
             
-            print(len(trend_data))
+            # print(len(trend_data))
             print(len(my_data))
             
-            return my_data,trend_data
+            return my_data
 
 
 
@@ -51,4 +47,4 @@ class scrape:
 if __name__ == "__main__":
     obj=scrape(scrape.url1)
     obj.scrape_1()
-    obj.json_parser()
+    obj.json_parser("bakery")

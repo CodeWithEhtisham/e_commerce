@@ -12,6 +12,74 @@
 
 		<!-- Loading main css file -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: #708090;;
+  padding: 14px 16px;
+  background-color: #708090;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(169,169,169,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+
 	</head>
 
 	<body>
@@ -33,7 +101,28 @@
 						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
 						<ul class="menu">
 							<li class="menu-item current-menu-item"><a href="{{ url_for('index') }}">Home</a></li>
-							<li class="menu-item"><a href="{{ url_for('trend') }}">Trend</a></li>
+							<li class="menu-item dropdown" >Category
+								<div class="dropdown-content" style="background-color: rgb(30, 32, 43);">
+								<a href="{{ url_for('wine') }}">Wine</a>
+								<a href="{{ url_for('bakery') }}">Bakery,Breakfast</a>
+								<a href="{{ url_for('dairy') }}">Dairy,Chilled,Eggs</a>
+								
+								<a href="{{ url_for('snacks') }}">Choco,Snacks,Sweets</a>
+								<a href="{{ url_for('frozen') }}">Frozen</a>
+								<a href="{{ url_for('household') }}">Household</a>
+
+								<a href="{{ url_for('health') }}">Health,Beauty</a>
+								<a href="{{ url_for('mother') }}">Mother,Baby</a>
+								<a href="{{ url_for('beverages') }}">Beverages</a>
+								
+								<a href="{{ url_for('rice') }}">Rice,Cooking Essentials</a>
+								<a href="{{ url_for('fruit') }}">Fruit,Vegetables</a>
+								<a href="{{ url_for('party') }}">Party Supplies</a>
+								<a href="{{ url_for('meat') }}">Meat,Seafood</a>
+								<a href="{{ url_for('new') }}">New,Seasonal</a>
+								
+								</div>
+							 </li>
 							<li class="menu-item"><a href="{{ url_for('calender') }}">calendar</a></li>
 
 						</ul> <!-- .menu -->

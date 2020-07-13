@@ -1,29 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>Compass Starter by Ariona, Rian</title>
 
-    <meta charset="utf-8">
-    <meta name="description" content="Simple Modern-looking Event Calendar Plugin">
-    <meta name="keywords" content="jQuery, Plugin, Event, Calendar, EvoCalendar">
-    <meta name="author" content="Edlyn Villegas">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="{{ url_for('static', filename='fonts/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-    <link rel="icon" href="static/favicon.png">
-
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='./evo-calendar/css/evo-calendar.min.css') }}">
-   
-    
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='demo.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<style>
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -88,36 +78,30 @@ body {
   display: block;
 }
 </style>
-</head>
-<body>
-    
-			  
+
+
+	</head>
+
+
+	<body>
 		<div class="site-content">
 			<div class="site-header">
 				<div class="container">
-					
 					<a href="index.html" class="branding">
 						<img src="static/images/logo.png" alt="" class="logo">
 						<div class="logo-type">
 							<h1 class="site-title">Company name</h1>
 							<small class="site-description">tagline goes here</small>
 							<form method="POST" class="search_form">
-							
 							</form>
 						</div>
-					</a>	
-					
-    <header>
-        <div class="header-container Midnight Blue">
-            
-    </header>
-    
+					</a>
 					<!-- Default snippet for navigation -->
 					<div class="main-navigation">
 						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
 						<ul class="menu">
 							<li class="menu-item "><a href="{{ url_for('index') }}">Home</a></li>
-							<li class="menu-item dropdown" >Category
+							<li class="menu-item dropdown current-menu-item" >Category
 								<div class="dropdown-content" style="background-color: rgb(30, 32, 43);">
 								<a href="{{ url_for('wine') }}">Wine</a>
 								<a href="{{ url_for('bakery') }}">Bakery,Breakfast</a>
@@ -139,36 +123,29 @@ body {
 								
 								</div>
 							 </li>
-							<li class="menu-item current-menu-item"><a href="{{ url_for('calender') }}">calendar</a></li>
+							<li class="menu-item"><a href="{{ url_for('calender') }}">calendar</a></li>
 						</ul> <!-- .menu -->
+					</div> <!-- .main-navigation -->
 
-
-						
-                    </div> <!-- .main-navigation -->
-                    <div class="mobile-navigation"></div>
+					<div class="mobile-navigation"></div>
 
 				</div>
-    <main>
-            <section id="demos">
-                <div class="section-content">
-                    <div class="console-log">
-                        <div class="log-content">
-                            <div class="--noshadow" id="demoEvoCalendar"></div>
-                        </div>
-                    </div>
-                  
-                </div>
-            </section>
-    
-            
+			</div> <!-- .site-header -->
+			<body>
+			<h1 style="padding-left: 5%;">Product:</h1>
+				<div id="wrap">
+				<div id="columns" class="columns_4">
+				{%for i in data.wine%}
+					<figure>
+						<img src="{{data.wine[i][1]}}">
+						<figcaption>{{data.wine[i][0]}}</figcaption>
+						<span class="price">{{data.wine[i][2]}}</span>
+						<br>
+						<span class="price">{{data.wine[i][3]}}</span>
+						<a class="button" href="#">Add to cart</a>
+					</figure>
 
-               
-                   
+				{% endfor %}
+			</body>
 
-    
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="static/./evo-calendar/js/evo-calendar.min.js"></script>
-    <script src="static/demo.js"></script>
-</body>
 </html>
