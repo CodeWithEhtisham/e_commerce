@@ -1,5 +1,5 @@
-from weatherData import weather
-from web_scraping import scrape
+from python.weatherData import weather
+from python.web_scraping import scrape
 from flask import Flask,render_template,url_for
 app=Flask(__name__)
 init=weather(weather.url,weather.api)

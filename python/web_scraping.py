@@ -8,6 +8,7 @@ import numpy as np
 import json
 from operator import itemgetter
 import random
+from pathlib import Path
 
 class scrape:
     url1="https://www.fairprice.com.sg/product-listing?hasStock=1&loadMoreType=SEEALL&sorting=POPULARITY&tag=best-sellers&title=Best%20Sellers&loc=ProductWidget-BestSellers&pageType=Home"
@@ -26,18 +27,29 @@ class scrape:
             print("request ",e)
             # pass
     def json_parser(self,name):
-        with open('data/label.json') as f:
+        base_path = Path(__file__).parent
+        file_path = (base_path / "../data/label.json").resolve()
+        with open(file_path) as f:
             data = json.load(f)
-            # trend=random.sample(range(0, 300), 60)
+            recommendation=random.sample(range(0, 800), 100)
             my_data={}
             # trend_data={}
-            data=data[str(name)]['data']
-            for index,value in enumerate(data):
-                my_data[index]=[value['itemTitle'],
-                value["itemImg"],value["itemPackageSize"],value["itemPrice"]+"$",str(value['itemReviews'])]
+            if name!="home":
+                data=data[str(name)]['data']
+                for index,value in enumerate(data):
+                    my_data[index]=[value['itemTitle'],
+                    value["itemImg"],value["itemPackageSize"],value["itemPrice"]+"$",str(value['itemReviews'])]
+            else:
+                    
+                data=data[str(name)]['data']
+                for index,value in enumerate(data):
+                    if index in recommendation:
+                        my_data[index]=[value['itemTitle'],
+                        value["itemImg"],value["itemPackageSize"],value["itemPrice"]+"$",str(value['itemReviews'])]
             
             # print(len(trend_data))
             print(len(my_data))
+
             
             return my_data
 
