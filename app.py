@@ -41,6 +41,11 @@ def calender():
     # show the form, it wasn't submitted
       return render_template('calender.html')
 
+@app.route('/event')
+def event():
+      print("event func")
+    # show the form, it wasn't submitted
+      return render_template('event.html')
 
 
 @app.route('/beverages')
